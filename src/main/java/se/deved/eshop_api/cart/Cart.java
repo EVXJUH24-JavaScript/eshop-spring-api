@@ -1,9 +1,6 @@
 package se.deved.eshop_api.cart;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import se.deved.eshop_api.user.User;
@@ -20,7 +17,7 @@ public class Cart {
     @Id
     private UUID id;
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER)
     private List<CartItem> cartItems;
 
     @OneToOne

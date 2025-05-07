@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import se.deved.eshop_api.cart.Cart;
 import se.deved.eshop_api.cart.CartRepository;
@@ -51,9 +52,9 @@ public class UserController {
         return ResponseEntity.ok(new AccessToken(token));
     }
 
-    @PostMapping("test")
-    public String test() {
-        return "Hello!";
+    @PostMapping("/test")
+    public String test(@AuthenticationPrincipal User user) {
+        return "Hello! " + user.getUsername();
     }
 
     @AllArgsConstructor

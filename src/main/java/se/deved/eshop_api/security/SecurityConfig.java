@@ -22,7 +22,11 @@ public class SecurityConfig {
     ) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/user/test").authenticated()
+                        .requestMatchers(HttpMethod.POST,"/api/cart/add-product").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/cart").authenticated()
+                        // Av någon anledning vill denna inte fungera
+                        //.requestMatchers("/api/cart/**").authenticated()
+                        .requestMatchers("/api/user/test").authenticated()
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(new AuthenticationFilter(jwtService, userRepository), UsernamePasswordAuthenticationFilter.class);
